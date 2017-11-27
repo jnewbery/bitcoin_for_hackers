@@ -1,43 +1,55 @@
-# Pre-Requisites
+# Bitcoin for Hackers
 
-Install python 3.5 or above on your machine:
+A demonstration of interesting technical topics in Bitcoin.
 
- * Windows: https://www.python.org/ftp/python/3.6.2/python-3.6.2-amd64.exe
- * Mac OS X: https://www.python.org/ftp/python/3.6.2/python-3.6.2-macosx10.6.pkg
- * Linux: see your distro docs
+### Pre-Requisites
 
-Install pip:
+##### Install python 3.5 or above on your machine:
+
+- Windows: https://www.python.org/ftp/python/3.6.2/python-3.6.2-amd64.exe
+- Mac OS X: https://www.python.org/ftp/python/3.6.2/python-3.6.2-macosx10.6.pkg
+- Linux: see your distro docs
+
+##### Install pip:
 
 Download this script: https://bootstrap.pypa.io/get-pip.py
 
 Run (you may need to specify python3 if you also have python2 installed)
 
-    $ python get-pip.py
+```
+$ python get-pip.py
+```
 
-Install git:
+##### Install git:
 
+```
 https://git-scm.com/downloads
+```
 
-Install virtualenv:
+### Install requirements
 
-    $ pip install virtualenv
+```
+$ git clone https://github.com/jnewbery/bitcoin_for_hackers
+$ cd bitcoin_for_hackers
+$ python3 -m venv .venv
+```
 
-# Download pb-exercises requirements
+##### Linux/OSX:
 
-    $ git clone https://github.com/jimmysong/pb-exercises
-    $ cd pb-exercises
-    $ virtualenv -p python3 .venv
+```
+$ . .venv/bin/activate
+(.venv) $ pip install -r requirements.txt
+```
 
-Linux/OSX:
+##### Windows:
 
-    $ . .venv/bin/activate
-    (.venv) $ pip install -r requirements.txt
+```
+> .venv\Scripts\activate.bat
+> pip install -r requirements.txt
+```
 
-Windows:
+### Run jupyter notebook
 
-    > .venv\Scripts\activate.bat
-    > pip install -r requirements.txt
-
-# Run jupyter notebook
-
-    (.venv) $ jupyter notebook
+```
+(.venv) $ jupyter notebook
+```
