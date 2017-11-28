@@ -233,7 +233,7 @@ class Signature:
         self.s = s
 
     def __repr__(self):
-        return '(r = {:x}, s = {:x})'.format(self.r, self.s)
+        return '({:.4}.., {:.4}..)'.format(str(self.r), str(self.s))
 
     def der(self):
         rbin = self.r.to_bytes(32, byteorder='big')
@@ -308,10 +308,13 @@ class PrivateKey:
         return str(self.secret)
 
 
-def get_key_pair():
-    pk = PrivateKey(randint(0, 2**256))
-    return pk, pk.point
-
+class Keypair():
+    def __init__(self):
+        self.privkey = PrivateKey(randint(0, 2**256))
+        self.pubkey = self.privkey.point
+        
+    def __repr__(self):
+        return "privkey: 0x{:<7.7}..., pubkey: 0x{:<7.7}...".format(self.privkey.hex(), self.pubkey.sec().hex())
 
 class PointTest(TestCase):
 
