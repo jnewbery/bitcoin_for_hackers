@@ -2,7 +2,7 @@ from binascii import hexlify, unhexlify
 from io import BytesIO
 from random import randint
 
-from helper import encode_base58, encode_base58_checksum, hash160, double_sha256
+from helper import hash160
 
 
 class FieldElement:
@@ -176,16 +176,6 @@ class S256Point(Point):
         else:
             return unhexlify('04{}{}'.format(self.x.hex(), self.y.hex()))
 
-    def address(self, compressed=True, testnet=False):
-        h160 = hash160(self.sec(compressed=compressed))
-        if testnet:
-            prefix = b'\x6f'
-        else:
-            prefix = b'\x00'
-        raw = prefix + h160
-        raw = raw + double_sha256(raw)[:4]
-        return encode_base58(raw).decode('ascii')
-
     def verify(self, z, sig):
         if isinstance(z, str):
             # Hash string and convert to int
@@ -290,18 +280,6 @@ class PrivateKey:
         if s * 2 > N:
             s = N - s
         return Signature(r, s)
-
-    def wif(self, compressed=True, testnet=False):
-        if testnet:
-            prefix = b'\xef'
-        else:
-            prefix = b'\x80'
-        if compressed:
-            postfix = b'\x01'
-        else:
-            postfix = b''
-        binary = self.secret.to_bytes(32, 'big')
-        return encode_base58_checksum(prefix + binary + postfix)
 
     def __repr__(self):
         return str(self.secret)
